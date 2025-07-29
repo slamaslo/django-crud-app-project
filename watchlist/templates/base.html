@@ -21,7 +21,6 @@
           {% if user.is_authenticated %}
           <span class="nav-username">Welcome, {{ user.first_name }}!</span>
           <a href="{% url 'watchlist_home' %}">My Watchlist</a>
-          <a href="{% url 'movie_list' %}">Browse Movies</a>
           <form action="{% url 'logout' %}" method="POST" class="logout-form">
             {% csrf_token %}
             <button type="submit" class="nav-button">Log Out</button>
@@ -30,6 +29,8 @@
           <a href="{% url 'signup' %}">Sign Up</a>
           <a href="{% url 'login' %}">Login</a>
           {% endif %}
+          <!-- Always shown -->
+          <a href="{% url 'movie_list' %}">Browse Movies</a>
         </nav>
       </div>
     </header>

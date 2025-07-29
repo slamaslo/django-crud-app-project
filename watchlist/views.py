@@ -36,12 +36,14 @@ def watchlist_home(request):
     items = WatchlistItem.objects.filter(user=request.user)
     return render(request, 'watchlist/watchlist_home.html', {'items': items})
 
-@login_required
+# @login_required
 def movie_list(request):
-    movies = Movie.objects.all()[:10]
-    watchlisted_ids = set(
-        WatchlistItem.objects.filter(user=request.user).values_list('movie_id', flat=True)
-    )
+    movies = Movie.objects.all()
+    if request.user.is_authenticated:
+        watchlisted_ids = WatchlistItem.objects.filter(user=request.user).values_list('movie_id', flat=True)
+    else:
+        watchlisted_ids = []
+
     return render(request, 'watchlist/movie_list.html', {'movies': movies, 'watchlisted_ids': watchlisted_ids})
 
 @login_required
