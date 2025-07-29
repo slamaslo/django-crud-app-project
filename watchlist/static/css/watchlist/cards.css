@@ -1,0 +1,80 @@
+.movie-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 24px;
+  justify-content: center;
+}
+
+.movie-card {
+  width: 320px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.movie-card img {
+  max-width: 250px;
+  height: auto;
+  display: block;
+  margin: 0 auto 8px;
+  border-radius: 4px;
+}
+
+.add-button {
+  background-color: #007BFF;
+  color: #FFF;
+  border: 2px solid #007BFF;
+  padding: 6px 12px;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.add-button:hover {
+  background-color: #0056b3;
+}
+
+.remove-button {
+  background-color: white;
+  color: #007BFF;
+  border: 2px solid #007BFF;
+  padding: 6px 12px;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.remove-button:hover {
+  background-color: #f0f8ff;
+}
+
+.update-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-weight: bold;
+  border-radius: 4px;
+  text-decoration: none;
+
+}
+
+.update-button:hover {
+  background-color: #218838;
+  cursor: default;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap; 
+}
+
+.card-actions form,
+.card-actions a {
+  display: inline-block;
+}

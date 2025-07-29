@@ -5,7 +5,6 @@ body {
   font-family: system-ui, sans-serif;
 }
 
-/* Full-width sticky header */
 header {
   width: 100%;
   background-color: #FAF9F6;
@@ -15,7 +14,13 @@ header {
   z-index: 1000;
 }
 
-/* Centered container for boxed look on desktop */
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+
 .header-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -26,7 +31,6 @@ header {
   box-sizing: border-box;
 }
 
-/* Logo styling */
 .header-logo-container p {
   margin: 0;
   font-weight: bold;
@@ -34,7 +38,6 @@ header {
   color: #333;
 }
 
-/* Nav styling */
 .nav-auth {
   display: flex;
   align-items: center;
@@ -71,7 +74,6 @@ nav a:hover, .nav-button:hover {
   display: flex;
   align-items: center;
 }
-
 
 /* Responsive tweaks */
 @media (max-width: 600px) {

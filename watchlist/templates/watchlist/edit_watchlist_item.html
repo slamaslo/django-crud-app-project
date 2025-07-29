@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/watchlist/edit-item.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1>Edit: {{ item.movie.title }} ({{ item.movie.year }})</h1>
+<img src="{{ item.movie.poster_url }}" alt="{{ item.movie.title }} poster" width="200" />
+
+<form action="{% url 'update_watchlist_item' item.id %}" method="POST" class="edit-form">
+  {% csrf_token %}
+
+  <label for="status">Status:</label>
+  <select name="status" id="status">
+    {% for value, label in item.STATUS_CHOICES %}
+      <option value="{{ value }}" {% if item.status == value %}selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="rating">Rating (1–5):</label>
+  <input type="number" name="rating" id="rating" value="{{ item.rating }}" min="1" max="5">
+
+  <label for="is_favorite">
+    <input type="checkbox" name="is_favorite" id="is_favorite" {% if item.is_favorite %}checked{% endif %}>
+    Mark as Favorite
+  </label>
+
+  <button type="submit" class="update-button">Save Changes</button>
+</form>
+{% endblock %}

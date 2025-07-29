@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/watchlist/movie-list.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2>Browse Movies</h2>
+<div class="movie-grid">
+{% for movie in movies %}
+  <div class="movie-card">
+    <h3>{{ movie.title }} ({{ movie.year }})</h3>
+    <img src="{{ movie.poster_url }}" alt="{{ movie.title }} poster">
+    
+    {% if movie.id in watchlisted_ids %}
+        <form action="{% url 'remove_from_watchlist' movie.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="remove-button">Remove from List</button>
+        </form>
+    {% else %}
+      <form action="{% url 'add_to_watchlist' movie.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="add-button">Add to List</button>
+      </form>
+    {% endif %}
+  </div>
+{% endfor %}
+</div>
+{% endblock %}
