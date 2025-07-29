@@ -1,0 +1,92 @@
+[
+{
+  "model": "watchlist.movie",
+  "pk": 1,
+  "fields": {
+    "title": "Inception",
+    "year": 2010,
+    "poster_url": "https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg"
+  }
+},
+{
+  "model": "watchlist.movie",
+  "pk": 2,
+  "fields": {
+    "title": "The Matrix",
+    "year": 1999,
+    "poster_url": "https://image.tmdb.org/t/p/w500/p96dm7sCMn4VYAStA6siNz30G1r.jpg"
+  }
+},
+{
+  "model": "watchlist.movie",
+  "pk": 3,
+  "fields": {
+    "title": "Interstellar",
+    "year": 2014,
+    "poster_url": "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"
+  }
+},
+{
+  "model": "watchlist.movie",
+  "pk": 4,
+  "fields": {
+    "title": "Pulp Fiction",
+    "year": 1994,
+    "poster_url": "https://image.tmdb.org/t/p/w500/vQWk5YBFWF4bZaofAbv0tShwBvQ.jpg"
+  }
+},
+{
+  "model": "watchlist.movie",
+  "pk": 5,
+  "fields": {
+    "title": "The Godfather",
+    "year": 1972,
+    "poster_url": "https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"
+  }
+},
+{
+  "model": "watchlist.movie",
+  "pk": 6,
+  "fields": {
+    "title": "The Dark Knight",
+    "year": 2008,
+    "poster_url": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+  }
+},
+{
+  "model": "watchlist.movie",
+  "pk": 7,
+  "fields": {
+    "title": "Fight Club",
+    "year": 1999,
+    "poster_url": "https://image.tmdb.org/t/p/w500/jSziioSwPVrOy9Yow3XhWIBDjq1.jpg"
+  }
+},
+{
+  "model": "watchlist.movie",
+  "pk": 8,
+  "fields": {
+    "title": "Forrest Gump",
+    "year": 1994,
+    "poster_url": "https://image.tmdb.org/t/p/w500/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg"
+  }
+},
+{
+  "model": "watchlist.movie",
+  "pk": 9,
+  "fields": {
+    "title": "The Shawshank Redemption",
+    "year": 1994,
+    "poster_url": "https://image.tmdb.org/t/p/w500/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg"
+  }
+},
+{
+  "model": "watchlist.movie",
+  "pk": 10,
+  "fields": {
+    "title": "The Social Network",
+    "year": 2010,
+    "poster_url": "https://image.tmdb.org/t/p/w500/n0ybibhJtQ5icDqTp8eRytcIHJx.jpg"
+  }
+}
+]
