@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  background-color: #FAF9F6;
+  color: #333;
+  font-family: system-ui, sans-serif;
+}
+
+/* Full-width sticky header */
+header {
+  width: 100%;
+  background-color: #FAF9F6;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Centered container for boxed look on desktop */
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Logo styling */
+.header-logo-container p {
+  margin: 0;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* Nav styling */
+.nav-auth {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 12px;
+}
+
+nav a, .nav-button {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 6px 12px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+nav a:hover, .nav-button:hover {
+  background-color: #EFEFEF;
+  border-color: #CCC;
+}
+
+.nav-username {
+  font-weight: 500;
+  padding: 6px 12px;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  nav ul {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}

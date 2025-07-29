@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/png" href="" />
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <title>Letterboxd Copycat</title>
+    {% block head %} {% endblock %}
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="header-logo-container">
+          <p>Letterboxd Copycat</p>
+        </div>
+        <nav class="nav-auth">
+          {% if user.is_authenticated %}
+          <span class="nav-username">Welcome, {{ user.first_name }}!</span>
+          <form action="{% url 'logout' %}" method="POST" class="logout-form">
+            {% csrf_token %}
+            <button type="submit" class="nav-button">Log Out</button>
+          </form>
+          {% else %}
+          <a href="{% url 'signup' %}">Sign Up</a>
+          <a href="{% url 'login' %}">Login</a>
+          {% endif %}
+        </nav>
+      </div>
+    </header>
+    <main>{% block content %} {% endblock %}</main>
+  </body>
+</html>
