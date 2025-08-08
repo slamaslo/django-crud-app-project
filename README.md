@@ -8,7 +8,7 @@ This project was built as a practice exercise to demonstrate CRUD operations in 
 
 ## Getting Started
 
-=� **Live App**: [Deployed on Heroku](watchlistr.lamaslo.com)
+=� **Live App**: [Deployed on Heroku](https://watchlistr.lamaslo.com)
 
 ## Technologies Used
 
