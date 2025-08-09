@@ -7,6 +7,19 @@
 
 {% block content %}
 <h2>Browse Movies</h2>
+
+{% if user.is_authenticated %}
+<div class="movie-search-section">
+  <h3>Search TMDB Database</h3>
+  <div class="search-container">
+    <input type="text" id="movie-search" placeholder="Search for movies..." />
+    <button id="search-btn">Search</button>
+  </div>
+  <div id="search-results"></div>
+</div>
+{% endif %}
+
+<h3>Movies in Database</h3>
 <div class="movie-grid">
   {% for movie in movies %}
     <div class="movie-card">
@@ -33,4 +46,94 @@
     </div>
   {% endfor %}
 </div>
+
+{% if user.is_authenticated %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('movie-search');
+    const searchBtn = document.getElementById('search-btn');
+    const searchResults = document.getElementById('search-results');
+
+    function performSearch() {
+        const query = searchInput.value.trim();
+        if (!query) return;
+
+        fetch(`{% url 'search_movies' %}?q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                displaySearchResults(data.results || []);
+            })
+            .catch(error => {
+                console.error('Search error:', error);
+                searchResults.innerHTML = '<p>Error searching movies</p>';
+            });
+    }
+
+    function displaySearchResults(results) {
+        if (results.length === 0) {
+            searchResults.innerHTML = '<p>No movies found</p>';
+            return;
+        }
+
+        const resultsHTML = results.map(movie => `
+            <div class="search-result-card">
+                <img src="https://image.tmdb.org/t/p/w185${movie.poster_path || ''}" 
+                     alt="${movie.title}" 
+                     onerror="this.src=''" />
+                <div class="movie-info">
+                    <h4>${movie.title} (${movie.release_date ? movie.release_date.substring(0, 4) : 'N/A'})</h4>
+                    <p>${movie.overview ? movie.overview.substring(0, 150) + '...' : 'No description available'}</p>
+                    <button class="add-tmdb-button" data-tmdb-id="${movie.id}">Add to Watchlist</button>
+                </div>
+            </div>
+        `).join('');
+
+        searchResults.innerHTML = resultsHTML;
+
+        document.querySelectorAll('.add-tmdb-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const tmdbId = this.dataset.tmdbId;
+                addMovieFromTMDB(tmdbId, this);
+            });
+        });
+    }
+
+    function addMovieFromTMDB(tmdbId, button) {
+        button.disabled = true;
+        button.textContent = 'Adding...';
+
+        fetch(`{% url 'add_movie_from_tmdb' 0 %}`.replace('0', tmdbId), {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                button.textContent = 'Added!';
+                button.classList.add('added');
+                setTimeout(() => location.reload(), 1000);
+            } else {
+                button.textContent = 'Error';
+                button.disabled = false;
+            }
+        })
+        .catch(error => {
+            console.error('Add movie error:', error);
+            button.textContent = 'Error';
+            button.disabled = false;
+        });
+    }
+
+    searchBtn.addEventListener('click', performSearch);
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            performSearch();
+        }
+    });
+});
+</script>
+{% endif %}
 {% endblock %}

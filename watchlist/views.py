@@ -1,10 +1,11 @@
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.views import LoginView
 from .forms import UserForm
 from .models import WatchlistItem, Movie
+from .services import TMDBService
 
 class Home(LoginView):
     template_name = 'home.html' 
@@ -78,3 +79,55 @@ def update_watchlist_item(request, item_id):
         item.is_favorite = 'is_favorite' in request.POST
         item.save()
     return redirect('watchlist_home')
+
+@login_required
+def search_movies(request):
+    if request.method == 'GET':
+        query = request.GET.get('q', '').strip()
+        if not query:
+            return JsonResponse({'results': []})
+        
+        try:
+            tmdb_service = TMDBService()
+            search_results = tmdb_service.search_movies(query)
+            return JsonResponse(search_results)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    
+    return JsonResponse({'error': 'GET method required'}, status=405)
+
+@login_required
+def add_movie_from_tmdb(request, tmdb_id):
+    if request.method == 'POST':
+        try:
+            tmdb_service = TMDBService()
+            movie_data = tmdb_service.get_movie_details(tmdb_id)
+            
+            if not movie_data:
+                return JsonResponse({'error': 'Movie not found'}, status=404)
+            
+            formatted_data = tmdb_service.format_movie_for_database(movie_data)
+            
+            movie, created = Movie.objects.get_or_create(
+                tmdb_id=tmdb_id,
+                defaults=formatted_data
+            )
+            
+            if not created and movie:
+                for key, value in formatted_data.items():
+                    if key != 'tmdb_id':
+                        setattr(movie, key, value)
+                movie.save()
+            
+            WatchlistItem.objects.get_or_create(user=request.user, movie=movie)
+            
+            return JsonResponse({
+                'success': True, 
+                'movie_id': movie.id,
+                'message': f'"{movie.title}" added to watchlist'
+            })
+            
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    
+    return JsonResponse({'error': 'POST method required'}, status=405)

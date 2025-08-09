@@ -21,6 +21,11 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# TMDB API Configuration
+TMDB_API_KEY = os.getenv('TMDB_API_KEY')
+TMDB_BASE_URL = 'https://api.themoviedb.org/3'
+TMDB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500'
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
